@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# get docker container ipAddress docker inspect --format '{{ .NetworkSettings.Networks.redis_redis_network.IPAddress }}' @containerName
+# map hsotname to ip-address
+# `-it` 
+docker exec  redis_node1 sh -c "echo yes | redis-cli --cluster create ${clusters} --cluster-replicas 1 -a ${RedisPassword}"
+
+
+
+

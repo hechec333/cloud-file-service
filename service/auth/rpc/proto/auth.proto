@@ -1,0 +1,42 @@
+syntax="proto3";
+package Auth;
+//protoc --go_out=./types --go-grpc_out=./types  auth.proto 
+option go_package=".;auth";
+
+service Auth {
+    rpc GetLoginAuth(GetLoginAuthRequest) returns (GetLoginAuthResponce);
+    rpc CheckEmailAuth(CheckEmailAuthRequest) returns (CheckEmailAuthResponce);
+    rpc VertifyCaptcha(VertifyCaptchaRequest) returns (VertifyCaptchaResponce);
+}
+
+message GetLoginAuthRequest {
+   int32 UserId  = 1;
+}
+
+message GetLoginAuthResponce {
+    string AccessToken  = 1;
+    int64 ExpireIn  = 2;
+    string RefreshToken  = 3;
+}
+
+message CheckEmailAuthRequest {
+    string Eid = 1;
+    string Code = 2;
+}
+
+message CheckEmailAuthResponce {
+    bool Success = 1;
+    string AuthToken = 2;
+}
+
+message VertifyCaptchaRequest {
+    string Cid =1 ; 
+	string Code  = 2;
+}
+
+message VertifyCaptchaResponce {
+    bool Success = 1;
+}
+
+
+

@@ -1,0 +1,12 @@
+version: "3.0"
+services:
+  nginx:
+    build:
+      context: Dockefile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./logs/nginx:/var/log/nginx
+      - ./logs/go:/var/log/go
+      - ./nginx.xml:/etc/nginx/nginx.xml
+    privileged: true

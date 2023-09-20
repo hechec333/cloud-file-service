@@ -1,0 +1,23 @@
+<nginx>
+    <config>
+        <workers>2<workers>
+        <listen>80</listen>
+        <connections>1024</connections>
+        <keepalive>60</keepalive>
+    </config>
+    <targets>
+        <name>etcd<name>
+        <address>etcd1:2379;etcd2:2379;etcd3:2379<address>
+    </targets>
+    <services>
+        <service>
+            <name>auth</name>
+            <trim-url>true<trim-url>
+            <address></address>
+        <service>
+        <service>
+            <name>fs</name>
+            <address></address>
+        </service>
+    </services>
+</nginx>

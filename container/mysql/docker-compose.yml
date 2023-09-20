@@ -1,0 +1,60 @@
+version: '3.0'
+networks:
+  backend:
+    driver: bridge
+services:
+    master:
+        image: mysql-cu:v1
+        hostname: master
+        environment:
+            - TZ=${TZ}
+            - MYSQL_USER=${MYSQL_USERNAME} # 设置 Mysql 用户名称
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD} # 设置 Mysql 用户密码
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} # 设置 Mysql root 用户密码
+        privileged: true
+        volumes:
+            - ${DATA_PATH_HOST}/master:/var/lib/mysql # 引用 .env 配置中 DATA_PATH_HOST 变量，将宿主机上存放 Mysql 数据的目录挂载到容器中 /var/lib/mysql 目录
+            - ${ETC_PATH_HOST}/master:/etc/mysql/conf.d # 挂载cu配置文件
+        ports:
+            - "3306:3306" # 设置容器3306端口映射指定宿主机端口
+        networks:
+            - backend
+        restart: always
+    
+    slave1:
+        image: mysql-cu:v1
+        hostname: slave1
+        environment:
+            - TZ=${TZ}
+            - MYSQL_USER=${MYSQL_USERNAME} # 设置 Mysql 用户名称
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD} # 设置 Mysql 用户密码
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} # 设置 Mysql root 用户密码
+        privileged: true
+        volumes:
+            - ${DATA_PATH_HOST}/slave1:/var/lib/mysql # 引用 .env 配置中 DATA_PATH_HOST 变量，将宿主机上存放 Mysql 数据的目录挂载到容器中 /var/lib/mysql 目录
+            - ${ETC_PATH_HOST}/slave1:/etc/mysql/conf.d # 挂载cu配置文件
+        ports:
+            - "3307:3306" # 设置容器3306端口映射指定宿主机端口
+        networks:
+            - backend
+        restart: always
+    
+    slave2:
+        image: mysql-cu:v1
+        hostname: slave2
+        environment:
+            - TZ=${TZ}
+            - MYSQL_USER=${MYSQL_USERNAME} # 设置 Mysql 用户名称
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD} # 设置 Mysql 用户密码
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} # 设置 Mysql root 用户密码
+        privileged: true
+        volumes:
+            - ${DATA_PATH_HOST}/slave2:/var/lib/mysql # 引用 .env 配置中 DATA_PATH_HOST 变量，将宿主机上存放 Mysql 数据的目录挂载到容器中 /var/lib/mysql 目录
+            - ${ETC_PATH_HOST}/slave2:/etc/mysql/conf.d # 挂载cu配置文件
+        ports:
+            - "3308:3306" # 设置容器3306端口映射指定宿主机端口
+        networks:
+            - backend
+        restart: always
+    
+    

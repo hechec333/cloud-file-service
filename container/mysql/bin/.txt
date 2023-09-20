@@ -1,0 +1,5 @@
+"mysql: [Warning] Using a password on the command line interface can be insecure.\n
+mysql: [Warning] Using a password on the command line interface can be insecure.\n
+mysql: [Warning] Using a password on the command line interface can be insecure.\n
+\"docker cp\" requires exactly 2 arguments.\nSee 'docker cp --help'.\n\nUsage:  docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-\n\tdocker cp [OPTIONS] SRC_PATH|
+- CONTAINER:DEST_PATH\n\nCopy files/folders between a container and the local filesystem\n"

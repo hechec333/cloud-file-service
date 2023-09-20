@@ -1,0 +1,13 @@
+# redis节点配置文件
+port ${PortSeed}
+requirepass ${RedisPassword}
+masterauth ${RedisPassword}
+protected-mode no
+daemonize no
+appendonly yes
+cluster-enabled yes
+cluster-config-file nodes.conf
+cluster-node-timeout 15000
+cluster-announce-ip ${IpAddr}
+cluster-announce-port ${PortSeed}
+cluster-announce-bus-port 1${PortSeed}

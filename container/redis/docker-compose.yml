@@ -1,0 +1,118 @@
+version: '3.0'
+
+services:
+  
+  redis_node1:
+    user: root
+    container_name: redis_node1
+    hostname: redis_node1
+    image: redis-cu:v1 
+    privileged: true
+    environment:
+      - REDISCLI_AUTH=123456
+    volumes:
+      - ${DATA_PATH_HOST}/r1:/data
+      - ${ETC_PATH_HOST}/redis_node1:/usr/local/etc
+    ports:
+      - "6379:6379"
+    networks:
+      redis_network:
+        ipv4_address: 192.62.11.2
+    command: ["redis-server","/usr/local/etc/redis.conf"]
+  
+  redis_node2:
+    user: root
+    container_name: redis_node2
+    hostname: redis_node2
+    image: redis-cu:v1 
+    privileged: true
+    environment:
+      - REDISCLI_AUTH=123456
+    volumes:
+      - ${DATA_PATH_HOST}/r2:/data
+      - ${ETC_PATH_HOST}/redis_node2:/usr/local/etc
+    ports:
+      - "6380:6379"
+    networks:
+      redis_network:
+        ipv4_address: 192.62.11.3
+    command: ["redis-server","/usr/local/etc/redis.conf"]
+  
+  redis_node3:
+    user: root
+    container_name: redis_node3
+    hostname: redis_node3
+    image: redis-cu:v1 
+    privileged: true
+    environment:
+      - REDISCLI_AUTH=123456
+    volumes:
+      - ${DATA_PATH_HOST}/r3:/data
+      - ${ETC_PATH_HOST}/redis_node3:/usr/local/etc
+    ports:
+      - "6381:6379"
+    networks:
+      redis_network:
+        ipv4_address: 192.62.11.4
+    command: ["redis-server","/usr/local/etc/redis.conf"]
+  
+  redis_node4:
+    user: root
+    container_name: redis_node4
+    hostname: redis_node4
+    image: redis-cu:v1 
+    privileged: true
+    environment:
+      - REDISCLI_AUTH=123456
+    volumes:
+      - ${DATA_PATH_HOST}/r4:/data
+      - ${ETC_PATH_HOST}/redis_node4:/usr/local/etc
+    ports:
+      - "6382:6379"
+    networks:
+      redis_network:
+        ipv4_address: 192.62.11.5
+    command: ["redis-server","/usr/local/etc/redis.conf"]
+  
+  redis_node5:
+    user: root
+    container_name: redis_node5
+    hostname: redis_node5
+    image: redis-cu:v1 
+    privileged: true
+    environment:
+      - REDISCLI_AUTH=123456
+    volumes:
+      - ${DATA_PATH_HOST}/r5:/data
+      - ${ETC_PATH_HOST}/redis_node5:/usr/local/etc
+    ports:
+      - "6383:6379"
+    networks:
+      redis_network:
+        ipv4_address: 192.62.11.6
+    command: ["redis-server","/usr/local/etc/redis.conf"]
+  
+  redis_node6:
+    user: root
+    container_name: redis_node6
+    hostname: redis_node6
+    image: redis-cu:v1 
+    privileged: true
+    environment:
+      - REDISCLI_AUTH=123456
+    volumes:
+      - ${DATA_PATH_HOST}/r6:/data
+      - ${ETC_PATH_HOST}/redis_node6:/usr/local/etc
+    ports:
+      - "6384:6379"
+    networks:
+      redis_network:
+        ipv4_address: 192.62.11.7
+    command: ["redis-server","/usr/local/etc/redis.conf"]
+  
+networks:
+  redis_network:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: "192.62.11.0/24"

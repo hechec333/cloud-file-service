@@ -1,0 +1,28 @@
+version: '{{.ComposeConfig.Version}}'
+
+services:
+  {{range $index,$value := .NodeConfig}}
+  {{$value.Label}}:
+    user: root
+    container_name: {{$value.Label}}
+    hostname: {{$value.Label}}
+    image: {{$.ComposeConfig.Image}} 
+    privileged: true
+    environment:
+      - REDISCLI_AUTH={{$.RedisCluster.Password}}
+    volumes:
+      - ${DATA_PATH_HOST}/{{$value.VolumeDir}}:/data
+      - ${ETC_PATH_HOST}/{{$value.Label}}:/usr/local/etc
+    ports:
+      - "{{getPort $index}}:{{$.RedisCluster.PortSeed}}"
+    networks:
+      redis_network:
+        ipv4_address: {{getIpAddr $index}}
+    command: ["redis-server","/usr/local/etc/redis.conf"]
+  {{end}}
+networks:
+  redis_network:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: "{{.ComposeConfig.Gateway}}/24"
